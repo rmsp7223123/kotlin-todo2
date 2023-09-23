@@ -1,9 +1,12 @@
-package com.example.kotlin_todo2.data
+package com.example.kotlin_todo2.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.kotlin_todo2.data.UserDatabase
+import com.example.kotlin_todo2.model.User
+import com.example.kotlin_todo2.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -21,7 +24,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) { /
         readAllData = repository.readAllData; // readAllData LiveData를 초기화, LiveData는 UI에서 사용자 목록을 관찰하는 데 사용
     };
 
-    fun addUser(user:User){ // 사용자를 추가하는 작업
+    fun addUser(user: User){ // 사용자를 추가하는 작업
         viewModelScope.launch(Dispatchers.IO) { // 새로운 코루틴 활성화 dispatcherIO는 백그라운드에서 실행
             repository.addUser(user); // 사용자를 데이터베이스에 추가
         };

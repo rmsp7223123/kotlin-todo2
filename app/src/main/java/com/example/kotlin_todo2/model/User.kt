@@ -1,4 +1,4 @@
-package com.example.kotlin_todo2.data
+package com.example.kotlin_todo2.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

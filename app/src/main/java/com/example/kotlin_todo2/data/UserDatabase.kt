@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.kotlin_todo2.model.User
 
 
 // 데이터 테이블을 접근하고 있을 때 메인 엑서스 포인트, 이곳을 통해 디바이스에 있는 데이터를 접근과 수정, 삭제

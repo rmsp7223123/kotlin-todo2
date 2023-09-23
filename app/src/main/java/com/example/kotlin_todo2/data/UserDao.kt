@@ -5,13 +5,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.kotlin_todo2.model.User
 
 
 // 데이터베이스를 접근할때 dao를 사용
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)//같은 데이터가 있으면 무시
-    suspend fun addUser(user:User); //suspend:코루틴사용 해서 user추가 (매개변수 user는 추가할 사용자의 정보)
+    suspend fun addUser(user: User); //suspend:코루틴사용 해서 user추가 (매개변수 user는 추가할 사용자의 정보)
     // 코루틴은 코루틴이 시작된 스레드를 중단하지 않으면서 비동기적으로 실행되는 코드
     // 코루틴은 기본적으로 일시중단이 가능
     // suspend fun -> 일반적으로 비동기 작업을 수행

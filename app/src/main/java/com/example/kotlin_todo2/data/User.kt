@@ -1,5 +1,6 @@
 package com.example.kotlin_todo2.data
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -10,6 +11,7 @@ import androidx.room.PrimaryKey
 data class User (
     @PrimaryKey(autoGenerate = true) // pk인 id는 자동으로 만들게
     val id : Int, // 컬럼1
+    // @ColumnInfo(name = "firstName") , @ColumnInfo를 따로 주지않을경우 변수명이 컬럼이름이 됨
     val firstName:String, // 컬럼2
     val lastName:String, // 컬럼3
     val age:Int // 컬럼4

@@ -15,4 +15,4 @@ data class User (
     val age:Int // 컬럼4
 ) {
 
-}
+};

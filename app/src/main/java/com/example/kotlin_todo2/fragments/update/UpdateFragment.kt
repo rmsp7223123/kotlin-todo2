@@ -45,13 +45,7 @@ class UpdateFragment : Fragment() {
 
     private fun updateItem(firstName: String, lastName: String, age: String){
         if (inputCheck(firstName,lastName,age)){
-
-            //updatedUser는 업데이트된 데이터입니다.
             val updatedUser = User(args.currentUser.id, firstName, lastName,age.toInt());
-
-            //updateUser쿼리를 만들어서 Update Query를 이용하여 database에 추가해줘야합니다.
-            //Update 쿼리는 DAO에서 추가해야합니다.
-            //지금은 viewModel에 update 쿼리가 생기면 updatedUser가 전달되도록 구현만 해놓겠습니다.
             mUserViewModel.updateUser(updatedUser);
             Toast.makeText(requireContext(),"변경완료",Toast.LENGTH_SHORT).show();
             findNavController().navigate(R.id.action_updateFragment_to_listFragment);

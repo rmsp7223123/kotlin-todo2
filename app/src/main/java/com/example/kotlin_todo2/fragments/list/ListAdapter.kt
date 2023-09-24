@@ -30,7 +30,7 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         holder.binding.ageTxt.text = currentItem.age.toString();
 
         holder.binding.rowLayout.setOnClickListener{
-            val action = ListFragmentDirections.actionListFragmentToUpdateFragment();
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem);
             // ListFragment에서 UpdateFragment로 이동하기 위한 동작을 정의한 NavDirections 객체를 생성
             holder.itemView.findNavController().navigate(action);
             // 사용자가 아이템을 클릭하면 해당 아이템의 정보를 가지고 UpdateFragment로 이동

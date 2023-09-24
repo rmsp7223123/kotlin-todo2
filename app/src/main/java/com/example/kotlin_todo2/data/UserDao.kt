@@ -13,6 +13,8 @@ import com.example.kotlin_todo2.model.User
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)//같은 데이터가 있으면 무시
+    // 데이터베이스에 이미 존재하는 동일한 Primary Key (PK) 값을 가진 데이터를 삽입하려는 경우 충돌이 발생할 수 있기 때문
+
     suspend fun addUser(user: User); //suspend:코루틴사용 해서 user추가 (매개변수 user는 추가할 사용자의 정보)
     // 코루틴은 코루틴이 시작된 스레드를 중단하지 않으면서 비동기적으로 실행되는 코드
     // 코루틴은 기본적으로 일시중단이 가능

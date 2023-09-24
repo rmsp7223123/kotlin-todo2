@@ -12,21 +12,20 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListFragment : Fragment() {
 
-    private lateinit var mUserViewModel: UserViewModel
+    // private lateinit var mUserViewModel: UserViewModel;
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_list, container, false);
 
         // FloatingActionButton에 대한 클릭 리스너 설정
         view.findViewById<FloatingActionButton>(R.id.floatingActionButton)
             .setOnClickListener {
-                findNavController().navigate(R.id.action_listFragment_to_addFragment2)
-            }
+                findNavController().navigate(R.id.action_listFragment_to_addFragment2);
+            };
 
-        return view
+        return view;
     }
 }

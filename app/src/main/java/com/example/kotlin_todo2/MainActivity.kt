@@ -14,11 +14,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater);
         setContentView(binding.root);
-        // ActionBar를 설정합니다.
-        setSupportActionBar(binding.toolbar) // 'binding.toolbar'는 ActionBar로 사용할 툴바의 ID입니다.
-
-        // Navigation Component와 ActionBar를 통합합니다.
-        setupActionBarWithNavController(findNavController(R.id.fragment))
+        setSupportActionBar(binding.toolbar);
+        setupActionBarWithNavController(findNavController(R.id.fragment)); // Navigation Component와 ActionBar를 통합
     }
 
     override fun onSupportNavigateUp(): Boolean {

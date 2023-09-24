@@ -27,11 +27,11 @@ class AddFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_add, container, false);
         mUserViewModel = ViewModelProvider(this)[UserViewModel::class.java]; // UserViewModel의 인스턴스를 생성하고 mUserViewModel 필드에 저장
 
-        val firstName = view.findViewById<EditText>(R.id.editTextTextPersonName).text.toString();
-        val lastName = view.findViewById<EditText>(R.id.editTextTextPersonName2).text.toString();
-        val age = view.findViewById<EditText>(R.id.editTextNumber).text.toString();
 
         view.findViewById<Button>(R.id.add_button).setOnClickListener{
+            val firstName = view.findViewById<EditText>(R.id.editTextTextPersonName).text.toString();
+            val lastName = view.findViewById<EditText>(R.id.editTextTextPersonName2).text.toString();
+            val age = view.findViewById<EditText>(R.id.editTextNumber).text.toString();
             insertDataToDatabase(firstName, lastName, age);
         }
         return view;

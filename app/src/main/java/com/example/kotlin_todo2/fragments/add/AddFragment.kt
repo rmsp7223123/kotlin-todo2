@@ -8,66 +8,55 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.viewbinding.ViewBindings
 import com.example.kotlin_todo2.R
 import com.example.kotlin_todo2.model.User
 import com.example.kotlin_todo2.viewmodel.UserViewModel
 
 class AddFragment : Fragment() {
+    private lateinit var mUserViewModel: UserViewModel; // UserViewModel 인스턴스를 저장하기 위한 mUserViewModel 필드를 선언
 
-    //뷰모델을 이니셜라이즈 해줍니다.
-    private lateinit var mUserViewModel: UserViewModel
-
-    override fun onCreateView(
+    override fun onCreateView(// 프래그먼트의 레이아웃을 초기화하고 화면에 표시할 View를 반환하는 역할
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // add 프라그먼트를 불러옵니다.
-        val view = inflater.inflate(R.layout.fragment_add, container, false)
+        val view = inflater.inflate(R.layout.fragment_add, container, false);
+        mUserViewModel = ViewModelProvider(this)[UserViewModel::class.java]; // UserViewModel의 인스턴스를 생성하고 mUserViewModel 필드에 저장
 
-        //뷰모델 프로바이더를 실행해줍니다.
-        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        val firstName = view.findViewById<EditText>(R.id.editTextTextPersonName).text.toString();
+        val lastName = view.findViewById<EditText>(R.id.editTextTextPersonName2).text.toString();
+        val age = view.findViewById<EditText>(R.id.editTextNumber).text.toString();
 
-        //버튼을 누르면 insertDataToDatabase가 실행됩ㄴ디ㅏ.
         view.findViewById<Button>(R.id.add_button).setOnClickListener{
-            // insertDataToDatabase()
+            insertDataToDatabase(firstName, lastName, age);
         }
-
-        return view
+        return view;
     }
 
-   /* private fun insertDataToDatabase() {
-        //사용자가 입력한 텍스트들을 가져옵니다.
-        val firstName = editTextTextPersonName.text.toString()
-        val lastName = editTextTextPersonName2.text.toString()
-        val age = editTextNumber.text
+    private fun insertDataToDatabase(firstName: String, lastName: String, age: String) { //사용자 데이터를 데이터베이스에 추가하는 역할
 
-        if(inputCheck(firstName,lastName,age)){ //inputcheck라는 함수를 만들어주었습니다.
-            //유저 오브젝트를 만들어줍니다.이 값이 database에 전송되게 됩니다.
-
-            val user = User(0,firstName, lastName, Integer.parseInt(age.toString()))
-            //id가 0인 이유는 우리가 PK를 자동으로 생성되게 만들어도 값을 넣어줘야합니다.
-
-            //뷰모델에 add user를 해줌으로써 데이터베이스에 user값을 넣어주게 됩니다.
-            mUserViewModel.addUser(user)
-
-            //토스트 메세지입니다.
-            Toast.makeText(requireContext(),"Successfully added!", Toast.LENGTH_LONG).show()
-            //다시 listfragment로 돌려보냅니다.
-            findNavController().navigate(R.id.action_addFragment_to_listFragment)
+        if(inputCheck(firstName,lastName,age)){ // 모든 필드가 비어 있지 않을 경우 코드 블록이 실행
+            val user = User(0, firstName, lastName, age.toInt());
+            // autoGenerate = true일때 id 필드를 0으로 설정하면, Room 라이브러리가 자동으로 새로운 고유한 id 값을 생성하고 할당
+            mUserViewModel.addUser(user);
+            Toast.makeText(requireContext(),"추가완료", Toast.LENGTH_LONG).show();
+            findNavController().navigate(R.id.action_addFragment2_to_listFragment);
         }else{
-            //만약 유저가 editText모두 넣지 않았다면 토스트 메세지를 띄웁니다.
-            Toast.makeText(requireContext(), "Please fill out all fields.", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "추가실패", Toast.LENGTH_LONG).show();
         }
     }
 
-    //텍스트박스가 비어있는지 확인합니다.
-    private fun inputCheck(firstName:String, lastName:String, age: Editable):Boolean{
-        return !(TextUtils.isEmpty(firstName)&&TextUtils.isEmpty(lastName)&& age.isEmpty())
+    //텍스트박스가 비어있는지 확인
+    private fun inputCheck(firstName:String, lastName:String, age: String):Boolean{
+        return !(TextUtils.isEmpty(firstName)&&TextUtils.isEmpty(lastName)&& age.isEmpty());
+        // TextUtils.isEmpty() 문자열이 비어 있거나 null인지를 확인하기 위해 사용
     }
 
-    */
+
 
 
 }

@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class UserViewModel(application: Application): AndroidViewModel(application) { // AndroidViewModel을 상속받는 Android ViewModel 클래스
     // Android 애플리케이션 컨텍스트를 가져와 사용할 수 있는 ViewModel 클래스
 
-    private val readAllData : LiveData<List<User>>; // LiveData 형식의 사용자 데이터 목록을 저장하는 LiveData 변수
+    val readAllData : LiveData<List<User>>; // LiveData 형식의 사용자 데이터 목록을 저장하는 LiveData 변수
     // LiveData는 관찰 가능한 데이터 객체로서, 데이터가 변경될 때 UI를 업데이트하는 데 사용
 
     private val repository : UserRepository; // UserRepository 클래스의 인스턴스를 저장하는 변수

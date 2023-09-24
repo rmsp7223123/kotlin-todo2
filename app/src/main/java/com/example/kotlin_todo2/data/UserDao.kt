@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.kotlin_todo2.model.User
 
 
@@ -18,6 +19,9 @@ interface UserDao {
     // suspend fun -> 일반적으로 비동기 작업을 수행
     //                작업이 필요할 때 중단할 수 있으며, 이후 다시 재개할 수 있음, 중단된 코루틴은 다른 코루틴이 실행될 때까지 기다릴 수 있음
     // https://velog.io/@heetaeheo/%EC%BD%94%ED%8B%80%EB%A6%B0-%EC%BD%94%EB%A3%A8%ED%8B%B4%EC%9D%B4%EB%9E%80 (코루틴 참고용)
+
+    @Update
+    suspend fun updateUser(user :User);
 
 
     @Query("SELECT * FROM user_table ORDER BY id ASC")

@@ -13,6 +13,10 @@ class UserRepository(private val userDao: UserDao) { // 데이터베이스 작�
         userDao.addUser(user); //DAO에서 만들었던 adduser을 실행
     };
 
+    suspend fun updateUser(user : User) {
+        userDao.updateUser(user);
+    }
+
 };
 
 // UserRepository클래스는 따로 만들지 않아도 되나, 데이터베이스 작업과 UI 레이어 간의 역할을 분리,

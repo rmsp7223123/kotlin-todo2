@@ -20,14 +20,8 @@ class ListFragment : Fragment() {
 
     lateinit var mUserViewModel: UserViewModel;
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentListBinding.inflate(layoutInflater);
-
-        val view = inflater.inflate(R.layout.fragment_list, container, false);
 
         // 리사이클러뷰
         val adapter = ListAdapter();

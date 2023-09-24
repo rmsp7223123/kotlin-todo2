@@ -1,9 +1,10 @@
 package com.example.kotlin_todo2.model
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
+import androidx.versionedparcelable.VersionedParcelize
 
 
 // @Entity annotation을 붙여주었기때문에, Room database가 이 dataclass가 Entity라는 걸 인식

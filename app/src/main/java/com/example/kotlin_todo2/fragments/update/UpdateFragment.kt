@@ -1,60 +1,66 @@
 package com.example.kotlin_todo2.fragments.update
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.kotlin_todo2.R
+import com.example.kotlin_todo2.databinding.FragmentUpdateBinding
+import com.example.kotlin_todo2.model.User
+import com.example.kotlin_todo2.viewmodel.UserViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [UpdateFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class UpdateFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val args by navArgs<UpdateFragmentArgs>();
+    private lateinit var binding : FragmentUpdateBinding;
+    private lateinit var mUserViewModel: UserViewModel;
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_update, container, false)
+        binding = FragmentUpdateBinding.inflate(layoutInflater);
+        binding.updateFirstNameEt.setText(args.currentUser.firstName);
+        binding.updateLastNameEt.setText(args.currentUser.firstName);
+        binding.updateAgeEt.setText(args.currentUser.age.toString());
+        val view = inflater.inflate(R.layout.fragment_update, container, false);
+        binding.updateButton.setOnClickListener {
+            val firstName = view.findViewById<EditText>(R.id.updateFirstName_et).text.toString();
+            val lastName = view.findViewById<EditText>(R.id.updateLastName_et).text.toString();
+            val age = view.findViewById<EditText>(R.id.updateAge_et).text.toString();
+            updateItem(firstName, lastName, age);
+        };
+
+        setHasOptionsMenu(true);
+
+        return binding.root;
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment UpdateFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            UpdateFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+    private fun updateItem(firstName: String, lastName: String, age: String){
+        if (inputCheck(firstName,lastName,age)){
+
+            //updatedUser는 업데이트된 데이터입니다.
+            val updatedUser = User(args.currentUser.id, firstName, lastName,age.toInt());
+
+            //updateUser쿼리를 만들어서 Update Query를 이용하여 database에 추가해줘야합니다.
+            //Update 쿼리는 DAO에서 추가해야합니다.
+            //지금은 viewModel에 update 쿼리가 생기면 updatedUser가 전달되도록 구현만 해놓겠습니다.
+            mUserViewModel.updateUser(updatedUser);
+            Toast.makeText(requireContext(),"변경완료",Toast.LENGTH_SHORT).show();
+            findNavController().navigate(R.id.action_updateFragment_to_listFragment);
+
+        } else{
+            Toast.makeText(requireContext(),"변경완료 실패",Toast.LENGTH_SHORT).show();
+        };
+    };
+    private fun inputCheck(firstName:String, lastName:String, age: String):Boolean{
+        return !(TextUtils.isEmpty(firstName)&& TextUtils.isEmpty(lastName)&& age.isEmpty());
+    };
 }

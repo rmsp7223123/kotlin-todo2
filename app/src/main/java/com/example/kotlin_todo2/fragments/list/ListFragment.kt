@@ -45,12 +45,12 @@ class ListFragment : Fragment() {
         })
 
         // FloatingActionButton에 대한 클릭 리스너 설정
-        view.findViewById<FloatingActionButton>(R.id.floatingActionButton)
-            .setOnClickListener {
-                findNavController().navigate(R.id.action_listFragment_to_addFragment2);
-            };
+        binding.floatingActionButton.setOnClickListener{
+            findNavController().navigate(R.id.action_listFragment_to_addFragment2);
+        };
 
         setHasOptionsMenu(true); // 메뉴 추가 , Fragment가 옵션 메뉴를 가지고 있음을 나타냄
+        // setHasOptionsMenu(true)를 호출하면 Fragment가 옵션 메뉴를 가지고 있음을 나타내며, Fragment가 화면에 표시될 때 옵션 메뉴가 활성화
 
         return binding.root;
     }

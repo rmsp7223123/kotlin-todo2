@@ -28,7 +28,6 @@ class ListFragment : Fragment() {
         val recyclerView = binding.recyclerview;
         recyclerView.adapter = adapter;
         recyclerView.layoutManager = LinearLayoutManager(requireContext());
-
         // 뷰모델 연결
         mUserViewModel = ViewModelProvider(this)[UserViewModel::class.java];
         // ViewModelProvider를 사용하여 UserViewModel 클래스의 인스턴스를 초기화하고 mUserViewModel 변수에 저장

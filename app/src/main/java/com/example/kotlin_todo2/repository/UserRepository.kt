@@ -17,6 +17,11 @@ class UserRepository(private val userDao: UserDao) { // 데이터베이스 작�
         userDao.updateUser(user);
     }
 
+    suspend fun deleteUser(user : User) {
+        userDao.deleteUser(user);
+    };
+
+
 };
 
 // UserRepository클래스는 따로 만들지 않아도 되나, 데이터베이스 작업과 UI 레이어 간의 역할을 분리,

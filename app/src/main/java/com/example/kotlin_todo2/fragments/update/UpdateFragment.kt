@@ -1,10 +1,14 @@
 package com.example.kotlin_todo2.fragments.update
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -54,5 +58,32 @@ class UpdateFragment : Fragment() {
     };
     private fun inputCheck(firstName:String, lastName:String, age: String):Boolean{
         return !(TextUtils.isEmpty(firstName)&& TextUtils.isEmpty(lastName)&& age.isEmpty());
+    };
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) { // action menu resource파일을 연결
+        inflater.inflate(R.menu.delete_menu, menu);
+    };
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.menu_delete){
+            deleteUser()
+        };
+        return super.onOptionsItemSelected(item);
+    };
+
+    private fun deleteUser(){
+        val builder = AlertDialog.Builder(requireContext());
+        builder.setPositiveButton("Yes"){ _, _ ->
+            mUserViewModel.deleteUser(args.currentUser);
+            Toast.makeText(requireContext(),"삭제: ${args.currentUser.firstName}",Toast.LENGTH_SHORT).show();
+            findNavController().navigate(R.id.action_updateFragment_to_listFragment);
+        };
+        builder.setNegativeButton("No") { _, _ ->
+        };
+
+        builder.setTitle("Delete ${args.currentUser.firstName}${args.currentUser.lastName}?");
+        builder.setMessage("Are you sure to delete ${args.currentUser.firstName}${args.currentUser.lastName}");
+
+        builder.create().show();
     };
 }
